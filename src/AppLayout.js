@@ -5,6 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { Root, Header, Nav, Content, Footer, config } from './Layout';
+import Connect from './components/Connect';
 
 const App = () => (
   <Root config={config} style={{ minHeight: '100vh' }}>
@@ -30,7 +31,9 @@ const App = () => (
     >
       Nav
     </Nav>
-    <Content>Content</Content>
+    <Content>
+      <Connect />
+    </Content>
     <Footer>footer</Footer>
   </Root>
 );

@@ -27,8 +27,8 @@ export const LayoutContext = React.createContext(initialConfig);
 const styles = () => ({
   root: {
     display: 'flex',
-    flexDirection: 'column',
-  },
+    flexDirection: 'column'
+  }
 });
 
 class Root extends React.Component {
@@ -36,17 +36,17 @@ class Root extends React.Component {
     super(props);
     this.setCollapse = val =>
       this.setState(({ collapsed }) => ({
-        collapsed: typeof val === 'object' ? !collapsed : val,
+        collapsed: typeof val === 'object' ? !collapsed : val
       }));
     this.setOpen = val =>
       this.setState(({ open }) => ({
-        open: typeof val === 'object' ? !open : val,
+        open: typeof val === 'object' ? !open : val
       }));
     this.state = {
-      open: false,
+      open: true,
       collapsed: false,
       setCollapse: this.setCollapse,
-      setOpen: this.setOpen,
+      setOpen: this.setOpen
     };
   }
 
@@ -69,7 +69,7 @@ class Root extends React.Component {
       navAnchor,
       headerPosition,
       squeezed,
-      footerShrink,
+      footerShrink
     } = config;
     const value = {
       ...this.state,
@@ -77,12 +77,12 @@ class Root extends React.Component {
       collapsible: getScreenValue(
         collapsible,
         width,
-        initialConfig.collapsible,
+        initialConfig.collapsible
       ),
       collapsedWidth: getScreenValue(
         collapsedWidth,
         width,
-        initialConfig.collapsedWidth,
+        initialConfig.collapsedWidth
       ),
       navVariant: getScreenValue(navVariant, width, initialConfig.navVariant),
       navWidth: getScreenValue(navWidth, width, initialConfig.navWidth),
@@ -90,15 +90,15 @@ class Root extends React.Component {
       headerPosition: getScreenValue(
         headerPosition,
         width,
-        initialConfig.headerPosition,
+        initialConfig.headerPosition
       ),
       squeezed: getScreenValue(squeezed, width, initialConfig.squeezed),
       footerShrink: getScreenValue(
         footerShrink,
         width,
-        initialConfig.footerShrink,
+        initialConfig.footerShrink
       ),
-      screen: width,
+      screen: width
     };
     return (
       <LayoutContext.Provider value={value}>
@@ -116,7 +116,7 @@ const createScreenPropTypes = valPropTypes =>
     sm: valPropTypes,
     md: valPropTypes,
     lg: valPropTypes,
-    xl: valPropTypes,
+    xl: valPropTypes
   });
 Root.propTypes = {
   // from HOC
@@ -128,52 +128,52 @@ Root.propTypes = {
   config: PropTypes.shape({
     clipped: PropTypes.oneOfType([
       PropTypes.bool,
-      createScreenPropTypes(PropTypes.bool),
+      createScreenPropTypes(PropTypes.bool)
     ]),
     collapsible: PropTypes.oneOfType([
       PropTypes.bool,
-      createScreenPropTypes(PropTypes.bool),
+      createScreenPropTypes(PropTypes.bool)
     ]),
     collapsedWidth: PropTypes.oneOfType([
       PropTypes.number,
-      createScreenPropTypes(PropTypes.number),
+      createScreenPropTypes(PropTypes.number)
     ]),
     collapsed: PropTypes.bool,
     navVariant: PropTypes.oneOfType([
       PropTypes.oneOf(['permanent', 'persistent', 'temporary']),
       createScreenPropTypes(
-        PropTypes.oneOf(['permanent', 'persistent', 'temporary']),
-      ),
+        PropTypes.oneOf(['permanent', 'persistent', 'temporary'])
+      )
     ]),
     navWidth: PropTypes.oneOfType([
       PropTypes.number,
-      createScreenPropTypes(PropTypes.number),
+      createScreenPropTypes(PropTypes.number)
     ]),
     navAnchor: PropTypes.oneOfType([
       PropTypes.oneOf(['left', 'bottom']),
-      createScreenPropTypes(PropTypes.oneOf(['left', 'bottom'])),
+      createScreenPropTypes(PropTypes.oneOf(['left', 'bottom']))
     ]),
     headerPosition: PropTypes.oneOfType([
       PropTypes.oneOf(['static', 'relative', 'sticky', 'fixed', 'absolute']),
       createScreenPropTypes(
-        PropTypes.oneOf(['static', 'relative', 'sticky', 'fixed', 'absolute']),
-      ),
+        PropTypes.oneOf(['static', 'relative', 'sticky', 'fixed', 'absolute'])
+      )
     ]),
     squeezed: PropTypes.oneOfType([
       PropTypes.bool,
-      createScreenPropTypes(PropTypes.bool),
+      createScreenPropTypes(PropTypes.bool)
     ]),
     footerShrink: PropTypes.oneOfType([
       PropTypes.bool,
-      createScreenPropTypes(PropTypes.bool),
-    ]),
+      createScreenPropTypes(PropTypes.bool)
+    ])
   }),
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired
 };
 Root.defaultProps = {
   className: '',
   component: 'div',
-  config: initialConfig,
+  config: initialConfig
 };
 
 export default withWidth()(withStyles(styles, { name: 'MuiRoot' })(Root));
