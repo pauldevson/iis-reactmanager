@@ -1,17 +1,12 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
 import Link from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
-import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -20,9 +15,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   paper: {
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center'
+    backgroundColor: '#ffffff'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -37,39 +30,27 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2)
   },
+  getIISAdmin: {
+    margin: theme.spacing(3, 1, 2)
+  },
   main: {
     marginTop: 'auto',
     marginBottom: 'auto'
   }
 }));
 
-const ConnectLink = React.forwardRef((props, ref) => (
-  <RouterLink innerRef={ref} to="/connect" {...props} />
-));
-
 export default function Home() {
   const classes = useStyles();
   return (
     <Container component="main" maxWidth="sm" className={classes.main}>
       <div className={classes.paper}>
-        {/* <CloudDownloadIcon fontSize="large" className={classes.avatar} /> */}
         <Typography component="h1" variant="h3">
           Connect
         </Typography>
         <br />
-        {/*<Typography component="p" variant="body1">
-          Start managing your Microsoft IIS Server right here.
-        </Typography>
         <Typography component="p" variant="body1">
-          <Link
-            href="https://blogs.iis.net/adminapi"
-            variant="body2"
-            target="_blank"
-            rel="noopener"
-          >
-            {'Learn More'}
-          </Link>
-        </Typography> */}
+          Let's connect to IIS Administration API.
+        </Typography>
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -117,22 +98,18 @@ export default function Home() {
           >
             Connect
           </Button>
-          {/* <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid> */}
+          <Button
+            className={classes.getIISAdmin}
+            href="https://go.microsoft.com/fwlink/?LinkId=829373"
+            target="_blank"
+            rel="noopener"
+          >
+            Get Microsoft IIS Administration
+          </Button>
+          <Typography component="p" variant="caption">
+            IIS Web Manager v0.1
+          </Typography>
         </form>
-        {/* <Box mt={5}>
-          <Button component={ConnectLink}>Skip this</Button>
-        </Box> */}
       </div>
     </Container>
   );
