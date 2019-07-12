@@ -8,6 +8,7 @@ import { Root, config } from 'Layout';
 import Home from 'components/Home';
 import NotFound from 'components/NotFound';
 import Connect from 'components/Connect';
+import WebServerLayout from 'components/WebServer/Layout';
 
 const theme = createMuiTheme({
   palette: {
@@ -24,7 +25,7 @@ const App = () => (
           <Route exact path="/" component={Home} />
           <Route exact path="/get" component={Home} />
           <Route path="/connect" component={Connect} />
-          <Route path="/server/websites" component={Connect} />
+          <Route path="/server/websites" component={WebServerLayout} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>

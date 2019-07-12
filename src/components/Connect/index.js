@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link as RouterLink, withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Slide from '@material-ui/core/Slide';
+import { sleep } from 'utils';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -40,14 +42,30 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Connect() {
+const ConnectLink = React.forwardRef((props, ref) => (
+  <RouterLink innerRef={ref} to="/server/websites" {...props} />
+));
+
+const Connect = ({ history }) => {
   const classes = useStyles();
   const [connParams, setConnParams] = useState({
-    serverUrl: '',
-    displayName: '',
+    serverUrl: 'https://localhost:588856/',
+    displayName: 'Local IIS',
     accessToken: '',
-    remember: false
+    remember: false,
+    connecting: false
   });
+
+  const connect = async () => {
+    setConnParams({
+      ...connParams,
+      connecting: !connParams.connecting
+    });
+  };
+
+  const isFormComplete = () =>
+    !connParams.connecting &&
+    Object.values(connParams).some(x => x === null || x === '');
 
   return (
     <Slide in={true} direction="left" timeout={600}>
@@ -73,7 +91,6 @@ export default function Connect() {
                 setConnParams({ ...connParams, serverUrl: e.target.value })
               }
             />
-            {connParams.serverUrl}
             <TextField
               variant="outlined"
               margin="normal"
@@ -111,8 +128,11 @@ export default function Connect() {
                   value="remember"
                   color="primary"
                   checked={connParams.rememer}
-                  onChange={e =>
-                    setConnParams({ ...connParams, rememer: e.target.value })
+                  onChange={() =>
+                    setConnParams({
+                      ...connParams,
+                      rememer: !connParams.rememer
+                    })
                   }
                 />
               }
@@ -120,10 +140,11 @@ export default function Connect() {
             />
             <br />
             <Button
-              type="submit"
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={connect}
+              disabled={isFormComplete()}
             >
               Connect
             </Button>
@@ -143,4 +164,6 @@ export default function Connect() {
       </Container>
     </Slide>
   );
-}
+};
+
+export default withRouter(Connect);
