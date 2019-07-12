@@ -8,6 +8,7 @@ import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Zoom from '@material-ui/core/Zoom';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -46,48 +47,50 @@ const ConnectLink = React.forwardRef((props, ref) => (
 export default function Home() {
   const classes = useStyles();
   return (
-    <Container component="main" maxWidth="sm" className={classes.main}>
-      <div className={classes.paper}>
-        <CloudDownloadIcon fontSize="large" className={classes.avatar} />
-        <Typography component="h1" variant="h3">
-          Hi there!
-        </Typography>
-        <br />
-        <Typography component="p" variant="body1">
-          Start managing your Microsoft IIS Server right here.
-        </Typography>
-        <Typography component="p" variant="body1">
-          <Link
-            href="https://blogs.iis.net/adminapi"
-            variant="body2"
+    <Zoom in={true} timeout={600}>
+      <Container component="main" maxWidth="sm" className={classes.main}>
+        <div className={classes.paper}>
+          <CloudDownloadIcon fontSize="large" className={classes.avatar} />
+          <Typography component="h1" variant="h3">
+            Hi there!
+          </Typography>
+          <br />
+          <Typography component="p" variant="body1">
+            Start managing your Microsoft IIS Server right here.
+          </Typography>
+          <Typography component="p" variant="body1">
+            <Link
+              href="https://blogs.iis.net/adminapi"
+              variant="body2"
+              target="_blank"
+              rel="noopener"
+            >
+              {'Learn More'}
+            </Link>
+          </Typography>
+          <Fab
+            type="button"
+            fullWidth
+            variant="extended"
+            color="primary"
+            className={classes.submit}
+            href="http://go.microsoft.com/fwlink/?LinkId=829373"
             target="_blank"
             rel="noopener"
           >
-            {'Learn More'}
-          </Link>
-        </Typography>
-        <Fab
-          type="button"
-          fullWidth
-          variant="extended"
-          color="primary"
-          className={classes.submit}
-          href="http://go.microsoft.com/fwlink/?LinkId=829373"
-          target="_blank"
-          rel="noopener"
-        >
-          {'Download Microsoft IIS Administration'}
-        </Fab>
-        <Typography component="p" variant="body2">
-          Version 2.2.0
-        </Typography>
-        <Typography component="p" variant="body2">
-          For Windows and Windows Server (64-bit)
-        </Typography>
-        <Box mt={5}>
-          <Button component={ConnectLink}>Skip this</Button>
-        </Box>
-      </div>
-    </Container>
+            {'Download Microsoft IIS Administration'}
+          </Fab>
+          <Typography component="p" variant="body2">
+            Version 2.2.0
+          </Typography>
+          <Typography component="p" variant="body2">
+            For Windows and Windows Server (64-bit)
+          </Typography>
+          <Box mt={5}>
+            <Button component={ConnectLink}>Skip this</Button>
+          </Box>
+        </div>
+      </Container>
+    </Zoom>
   );
 }

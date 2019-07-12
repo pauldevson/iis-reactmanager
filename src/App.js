@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import teal from '@material-ui/core/colors/teal';
+import { Root, config } from 'Layout';
+import Home from 'components/Home';
+import NotFound from 'components/NotFound';
+import Connect from 'components/Connect';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const theme = createMuiTheme({
+  palette: {
+    primary: teal
+  }
+});
+
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <Root config={config} style={{ minHeight: '100vh' }}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/get" component={Home} />
+          <Route path="/connect" component={Connect} />
+          <Route path="/server/websites" component={Connect} />
+          <Route component={NotFound} />
+        </Switch>
+      </BrowserRouter>
+    </Root>
+  </ThemeProvider>
+);
 
 export default App;

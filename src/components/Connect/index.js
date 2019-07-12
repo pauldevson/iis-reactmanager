@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +7,7 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Slide from '@material-ui/core/Slide';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -39,78 +40,107 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Home() {
+export default function Connect() {
   const classes = useStyles();
+  const [connParams, setConnParams] = useState({
+    serverUrl: '',
+    displayName: '',
+    accessToken: '',
+    remember: false
+  });
+
   return (
-    <Container component="main" maxWidth="sm" className={classes.main}>
-      <div className={classes.paper}>
-        <Typography component="h1" variant="h3">
-          Connect
-        </Typography>
-        <br />
-        <Typography component="p" variant="body1">
-          Let's connect to IIS Administration API.
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label="Server URL"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Display Name"
-            type="text"
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Access Token"
-            type="text"
-          />
-          <span style={{ float: 'right' }}>
-            Don't have an access token?{' '}
-            <Link href="#" variant="body2">
-              {'Get Access Token'}
-            </Link>
-          </span>
-          <br />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Keep me connected from now on"
-          />
-          <br />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+    <Slide in={true} direction="left" timeout={600}>
+      <Container component="main" maxWidth="sm" className={classes.main}>
+        <div className={classes.paper}>
+          <Typography component="h1" variant="h3">
             Connect
-          </Button>
-          <Button
-            className={classes.getIISAdmin}
-            href="https://go.microsoft.com/fwlink/?LinkId=829373"
-            target="_blank"
-            rel="noopener"
-          >
-            Get Microsoft IIS Administration
-          </Button>
-          <Typography component="p" variant="caption">
-            IIS Web Manager v0.1
           </Typography>
-        </form>
-      </div>
-    </Container>
+          <br />
+          <Typography component="p" variant="body1">
+            Let's connect to IIS Administration API.
+          </Typography>
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Server URL"
+              autoFocus
+              value={connParams.serverUrl}
+              onChange={e =>
+                setConnParams({ ...connParams, serverUrl: e.target.value })
+              }
+            />
+            {connParams.serverUrl}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Display Name"
+              type="text"
+              value={connParams.displayName}
+              onChange={e =>
+                setConnParams({ ...connParams, displayName: e.target.value })
+              }
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Access Token"
+              type="text"
+              value={connParams.accessToken}
+              onChange={e =>
+                setConnParams({ ...connParams, accessToken: e.target.value })
+              }
+            />
+            <span style={{ float: 'right' }}>
+              Don't have an access token?{' '}
+              <Link href="#" variant="body2">
+                {'Get Access Token'}
+              </Link>
+            </span>
+            <br />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  value="remember"
+                  color="primary"
+                  checked={connParams.rememer}
+                  onChange={e =>
+                    setConnParams({ ...connParams, rememer: e.target.value })
+                  }
+                />
+              }
+              label="Keep me connected from now on"
+            />
+            <br />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Connect
+            </Button>
+            <Button
+              className={classes.getIISAdmin}
+              href="https://go.microsoft.com/fwlink/?LinkId=829373"
+              target="_blank"
+              rel="noopener"
+            >
+              Get Microsoft IIS Administration
+            </Button>
+            <Typography component="p" variant="caption">
+              IIS Web Manager v0.1
+            </Typography>
+          </form>
+        </div>
+      </Container>
+    </Slide>
   );
 }
