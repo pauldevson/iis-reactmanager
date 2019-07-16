@@ -48,24 +48,25 @@ const ConnectLink = React.forwardRef((props, ref) => (
 
 const Connect = ({ history }) => {
   const classes = useStyles();
+
   const [connParams, setConnParams] = useState({
     serverUrl: 'https://localhost:588856/',
     displayName: 'Local IIS',
     accessToken: '',
-    remember: false,
-    connecting: false
+    remember: false
   });
 
-  const connect = async () => {
-    setConnParams({
-      ...connParams,
-      connecting: !connParams.connecting
-    });
-  };
+  const isFormComplete = Object.values(connParams).some(
+    x => x === null || x === ''
+  );
 
-  const isFormComplete = () =>
-    !connParams.connecting &&
-    Object.values(connParams).some(x => x === null || x === '');
+  const [connecting, setConnecting] = useState(false);
+
+  const connect = () => setConnecting(true);
+
+  useEffect(() => {
+    if (connecting) setTimeout(() => history.push('/server/websites'), 1000);
+  }, [connecting, history]);
 
   return (
     <Slide in={true} direction="left" timeout={600}>
@@ -144,7 +145,7 @@ const Connect = ({ history }) => {
               color="primary"
               className={classes.submit}
               onClick={connect}
-              disabled={isFormComplete()}
+              disabled={isFormComplete || connecting}
             >
               Connect
             </Button>

@@ -25,7 +25,7 @@ const App = () => (
           <Route exact path="/" component={Home} />
           <Route exact path="/get" component={Home} />
           <Route path="/connect" component={Connect} />
-          <Route path="/server/websites" component={WebServerLayout} />
+          <Route path="/server" component={WebServerLayout} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
