@@ -13,7 +13,7 @@ const styles = ({
   palette,
   spacing,
   zIndex,
-  shadows,
+  shadows
 }) => ({
   root: {},
   container: {
@@ -23,12 +23,12 @@ const styles = ({
     flexDirection: 'column',
     transition: transitions.create(['width'], {
       easing: transitions.easing.sharp,
-      duration: transitions.duration.leavingScreen,
-    }),
+      duration: transitions.duration.leavingScreen
+    })
   },
   content: {
     flexGrow: 1,
-    overflow: 'auto',
+    overflow: 'auto'
   },
   collapseButton: {
     backgroundColor: palette.grey[50],
@@ -37,8 +37,8 @@ const styles = ({
     borderTop: '1px solid',
     borderColor: 'rgba(0,0,0,0.12)',
     [breakpoints.up('sm')]: {
-      minHeight: 40,
-    },
+      minHeight: 40
+    }
   },
   closeButton: {
     position: 'absolute',
@@ -47,12 +47,12 @@ const styles = ({
     background: palette.common.white,
     boxShadow: shadows[2],
     '@media (hover: none)': {
-      backgroundColor: palette.grey[300],
+      backgroundColor: palette.grey[300]
     },
     '&:hover': {
-      backgroundColor: '#e5e5e5',
-    },
-  },
+      backgroundColor: '#e5e5e5'
+    }
+  }
 });
 
 const Nav = ({
@@ -74,7 +74,7 @@ const Nav = ({
     collapsedWidth,
     collapsible,
     collapsed,
-    setCollapse,
+    setCollapse
   } = ctx;
   const getWidth = () => {
     if (collapsible && collapsed) return collapsedWidth;
@@ -131,14 +131,14 @@ Nav.propTypes = {
   header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   collapsedIcon: PropTypes.shape({
     inactive: PropTypes.node.isRequired,
-    active: PropTypes.node,
-  }),
+    active: PropTypes.node
+  })
 };
 Nav.defaultProps = {
   className: '',
   component: 'div',
   header: null,
-  collapsedIcon: null,
+  collapsedIcon: null
 };
 
 export default withStyles(styles, { name: 'MuiNav' })(Nav);

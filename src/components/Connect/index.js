@@ -42,10 +42,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ConnectLink = React.forwardRef((props, ref) => (
-  <RouterLink innerRef={ref} to="/server/websites" {...props} />
-));
-
 const Connect = ({ history }) => {
   const classes = useStyles();
 
@@ -65,7 +61,7 @@ const Connect = ({ history }) => {
   const connect = () => setConnecting(true);
 
   useEffect(() => {
-    if (connecting) setTimeout(() => history.push('/server/websites'), 1000);
+    if (connecting) setTimeout(() => history.push('/server/web-sites'), 1000);
   }, [connecting, history]);
 
   return (

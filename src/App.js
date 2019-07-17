@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import teal from '@material-ui/core/colors/teal';
-import { Root, config } from 'Layout';
+import { Root, config, presets } from 'Layout';
 import Home from 'components/Home';
 import NotFound from 'components/NotFound';
 import Connect from 'components/Connect';

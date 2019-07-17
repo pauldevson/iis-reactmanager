@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -32,9 +33,16 @@ const navItems = [
   }
 ];
 
-const NavListItems = () => {
+const NavListItems = props => {
+  const { selectedItem } = props;
   return navItems.map((item, index) => (
-    <ListItem button key={item.id} component={CollisionLink} to={item.url}>
+    <ListItem
+      button
+      key={item.id}
+      component={CollisionLink}
+      to={item.url}
+      selected={item.id === selectedItem}
+    >
       <ListItemIcon>
         <Icon>{item.icon}</Icon>
       </ListItemIcon>
@@ -43,6 +51,14 @@ const NavListItems = () => {
   ));
 };
 
-const NavList = () => <div>{NavListItems()}</div>;
+const NavList = props => <div>{NavListItems(props)}</div>;
+
+NavList.propTypes = {
+  selectedItem: PropTypes.number
+};
+
+NavList.defaultPropTypes = {
+  selectedItem: -1
+};
 
 export default NavList;
