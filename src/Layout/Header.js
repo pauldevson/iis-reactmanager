@@ -10,13 +10,13 @@ const styles = ({ transitions }) => ({
   root: {
     transition: transitions.create(['margin', 'width'], {
       easing: transitions.easing.sharp,
-      duration: transitions.duration.leavingScreen,
-    }),
+      duration: transitions.duration.leavingScreen
+    })
   },
   menuButton: {
     marginLeft: -8,
-    marginRight: 8,
-  },
+    marginRight: 8
+  }
 });
 
 const createGet = (
@@ -24,7 +24,7 @@ const createGet = (
   normal,
   shrink,
   pushed,
-  unsqueeze,
+  unsqueeze
 ) => () => {
   if (clipped || navAnchor !== 'left') return normal;
   if (navVariant === 'persistent' && open) {
@@ -65,14 +65,14 @@ const Header = ({
     navVariant,
     headerPosition,
     open,
-    setOpen,
+    setOpen
   } = ctx;
   const getWidth = createGet(
     ctx,
     '100%',
     `calc(100% - ${collapsedWidth}px)`,
     `calc(100% - ${navWidth}px)`,
-    '100%',
+    '100%'
   );
   const getMargin = createGet(ctx, 0, collapsedWidth, navWidth, navWidth);
   const shouldRenderMenu = navVariant !== 'permanent' && !!menuIcon;
@@ -87,7 +87,7 @@ const Header = ({
         ...style,
         zIndex: clipped ? theme.zIndex.drawer + 1 : theme.zIndex.appBar,
         width: getWidth(),
-        marginLeft: getMargin(),
+        marginLeft: getMargin()
       }}
     >
       <Toolbar {...toolbarProps}>
@@ -113,8 +113,8 @@ Header.propTypes = {
   toolbarProps: PropTypes.shape({}),
   menuIcon: PropTypes.shape({
     inactive: PropTypes.node.isRequired,
-    active: PropTypes.node,
-  }),
+    active: PropTypes.node
+  })
 };
 Header.defaultProps = {
   className: '',
@@ -122,7 +122,7 @@ Header.defaultProps = {
   style: {},
   position: 'relative',
   toolbarProps: {},
-  menuIcon: null,
+  menuIcon: null
 };
 
 export default withTheme(withStyles(styles, { name: 'MuiHeader' })(Header));

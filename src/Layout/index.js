@@ -34,13 +34,14 @@ export const config = {
   },
   clipped: {
     xs: true,
-    sm: false,
-    md: false
+    sm: true,
+    md: true
   },
   headerPosition: {
     xs: 'relative',
     sm: 'relative',
-    md: 'sticky'
+    md: 'fixed',
+    lg: 'fixed'
   },
   squeezed: {
     xs: true,
@@ -50,6 +51,50 @@ export const config = {
   footerShrink: {
     xs: true,
     sm: true,
+    md: true
+  }
+};
+
+export const clippedConfig = {
+  navAnchor: 'left',
+  navVariant: {
+    xs: 'temporary',
+    sm: 'temporary',
+    md: 'persistent'
+  },
+  navWidth: {
+    xs: 240,
+    sm: 256,
+    md: 256
+  },
+  collapsible: {
+    xs: false,
+    sm: false,
+    md: false
+  },
+  collapsedWidth: {
+    xs: 64,
+    sm: 64,
+    md: 64
+  },
+  clipped: {
+    xs: true,
+    sm: true,
+    md: true
+  },
+  headerPosition: {
+    xs: 'fixed',
+    sm: 'fixed',
+    md: 'fixed'
+  },
+  squeezed: {
+    xs: true,
+    sm: true,
+    md: true
+  },
+  footerShrink: {
+    xs: false,
+    sm: false,
     md: true
   }
 };
