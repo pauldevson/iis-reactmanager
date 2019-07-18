@@ -10,9 +10,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Link from '@material-ui/core/Link';
 import ServerSelector from './ServerSelector';
 import Tooltip from '@material-ui/core/Tooltip';
-import Divider from '@material-ui/core/Divider';
 
-const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
+const styles = (/*{ spacing, transitions, breakpoints, palette, shape }*/) => ({
   header: {
     fontWeight: 900,
     minWidth: 0,
