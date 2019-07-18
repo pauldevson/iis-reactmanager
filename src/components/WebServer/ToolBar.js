@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import { withStyles, useTheme } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
+import { CloudDownload, Code } from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Link from '@material-ui/core/Link';
 import ServerSelector from './ServerSelector';
 import Tooltip from '@material-ui/core/Tooltip';
+import Divider from '@material-ui/core/Divider';
 
 const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
   header: {
@@ -55,18 +57,21 @@ const ToolBar = ({ classes, screen }) => {
       )}
       {md && (
         <>
-          <Tooltip title="Manage Servers">
+          <Tooltip title="Server Connections">
             <ServersLink>
               <IconButton>
                 <Icon className="fa fa-server" />
               </IconButton>
             </ServersLink>
           </Tooltip>
-
           <Tooltip title="Download IIS Administration API">
-            <Link href="" target="_blank" rel="noopener">
+            <Link
+              href="http://go.microsoft.com/fwlink/?LinkId=829373"
+              target="_blank"
+              rel="noopener"
+            >
               <IconButton>
-                <Icon>cloud_download</Icon>
+                <CloudDownload />
               </IconButton>
             </Link>
           </Tooltip>
@@ -77,7 +82,7 @@ const ToolBar = ({ classes, screen }) => {
               rel="noopener"
             >
               <IconButton>
-                <Icon>code</Icon>
+                <Code />
               </IconButton>
             </Link>
           </Tooltip>

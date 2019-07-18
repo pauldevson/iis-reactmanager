@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
-import { withStyles, useTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Icon, ListItemIcon } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
 
 const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
   search: {
@@ -21,7 +22,7 @@ const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
     }
   },
   searchIcon: {
-    width: spacing(9),
+    width: spacing(6),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -38,7 +39,7 @@ const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
     paddingTop: spacing(1),
     paddingRight: spacing(3),
     paddingBottom: spacing(1),
-    paddingLeft: spacing(10),
+    paddingLeft: spacing(6),
     transition: transitions.create('width'),
     width: '100%',
     [breakpoints.up('sm')]: {
@@ -53,22 +54,24 @@ const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
 
 const servers = [
   'MTPWBPZ1.us.bosch.com',
-  'MTPWBPZ2',
-  'MTPWBPZ3',
-  'MTPWBPZ4',
-  'MTPWBPZ5',
-  'MTPWBPZ6'
+  'MTPWBPZ2.us.bosch.com',
+  'MTPWBPZ3.us.bosch.com',
+  'MTPWBPZ4.us.bosch.com',
+  'MTPWBPZ5.us.bosch.com',
+  'MTPWBPZ6.us.bosch.com'
 ];
 
 const ServerSelector = ({ classes }) => {
-  const [serverName, setServerName] = useState(servers[0]);
+  const [serverName, setServerName] = useState(servers[2]);
 
   const handleServerChange = e => {
     setServerName(e.target.value);
   };
   return (
     <div className={classes.search}>
-      <div className={classes.searchIcon}>IIS =></div>
+      <div className={classes.searchIcon}>
+        <Icon>cast_connected</Icon>
+      </div>
       <Select
         variant="outlined"
         value={serverName}
@@ -90,12 +93,29 @@ const ServerSelector = ({ classes }) => {
           },
           getContentAnchorEl: null
         }}
+        renderValue={value => value}
       >
-        {servers.map(server => (
-          <MenuItem value={server} key={server}>
-            {server}
-          </MenuItem>
-        ))}
+        {servers &&
+          servers.map(server => (
+            <MenuItem value={server} key={server}>
+              <ListItemIcon>
+                {server === serverName ? (
+                  <Icon>cast_connected</Icon>
+                ) : (
+                  <Icon>cast</Icon>
+                )}
+              </ListItemIcon>
+              {server}
+            </MenuItem>
+          ))}
+
+        <Divider />
+        <MenuItem value={'nothing'}>
+          <ListItemIcon>
+            <Icon>settings</Icon>
+          </ListItemIcon>
+          Add or remove servers
+        </MenuItem>
       </Select>
       {/* <InputBase
       placeholder="Server..."
