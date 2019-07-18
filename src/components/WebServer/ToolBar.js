@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Link from '@material-ui/core/Link';
 import ServerSelector from './ServerSelector';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
   header: {
@@ -54,29 +55,32 @@ const ToolBar = ({ classes, screen }) => {
       )}
       {md && (
         <>
-          <ServersLink>
-            <IconButton>
-              <Icon className="fa fa-server" />
-            </IconButton>
-          </ServersLink>
-          <Link
-            href="https://manage.iis.net/get"
-            target="_blank"
-            rel="noopener"
-          >
-            <IconButton>
-              <Icon>cloud_download</Icon>
-            </IconButton>
-          </Link>
-          <Link
-            href="https://github.com/microsoft/iis.administration"
-            target="_blank"
-            rel="noopener"
-          >
-            <IconButton>
-              <Icon>code</Icon>
-            </IconButton>
-          </Link>
+          <Tooltip title="Manage Servers">
+            <ServersLink>
+              <IconButton>
+                <Icon className="fa fa-server" />
+              </IconButton>
+            </ServersLink>
+          </Tooltip>
+
+          <Tooltip title="Download IIS Administration API">
+            <Link href="" target="_blank" rel="noopener">
+              <IconButton>
+                <Icon>cloud_download</Icon>
+              </IconButton>
+            </Link>
+          </Tooltip>
+          <Tooltip title="Developers">
+            <Link
+              href="https://github.com/microsoft/iis.administration"
+              target="_blank"
+              rel="noopener"
+            >
+              <IconButton>
+                <Icon>code</Icon>
+              </IconButton>
+            </Link>
+          </Tooltip>
         </>
       )}
     </>
