@@ -44,8 +44,8 @@ export default function WebSitesTable(props) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {sites.map(site => {
-          return (
+        {sites &&
+          sites.map(site => (
             <TableRow key={site.name}>
               <TableCell component="th" scope="row">
                 <Link
@@ -63,7 +63,7 @@ export default function WebSitesTable(props) {
                   component={CollisionLink}
                   to={`/server/application-pools/${site.poolName}`}
                 >
-                  {site.name}
+                  {site.poolName}
                 </Link>
               </TableCell>
               <TableCell>
@@ -73,12 +73,15 @@ export default function WebSitesTable(props) {
               </TableCell>
               <TableCell align="right">
                 <SiteOptionsMenu
-                  site={{ id: site.id, isRunning: site.status === 'Started' }}
+                  site={{
+                    id: site.id,
+                    isRunning: site.status === 'Started',
+                    browseUrl: site.binding
+                  }}
                 />
               </TableCell>
             </TableRow>
-          );
-        })}
+          ))}
       </TableBody>
     </Table>
     // <Paper className={classes.root}>

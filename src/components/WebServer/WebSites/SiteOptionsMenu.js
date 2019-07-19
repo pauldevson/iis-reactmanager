@@ -4,7 +4,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
+import { CollisionLink, SimpleLink } from 'utils';
 
 const useStyles = makeStyles(theme => ({
   siteMenu: {
@@ -13,23 +15,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SiteOptionsMenu = ({ site }) => {
-  const { siteId, isRunning } = site;
+  const { id, isRunning, browseUrl } = site;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const handleSiteOptionsMenu = event => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
   return (
     <>
       <IconButton
         aria-label="Manage"
         onClick={handleSiteOptionsMenu}
-        aria-controls={siteId}
+        aria-controls={id}
         aria-haspopup="true"
       >
         <Icon>settings</Icon>
       </IconButton>
       <Menu
-        id={siteId}
+        id={id}
         anchorEl={anchorEl}
         // keepMounted
         open={Boolean(anchorEl)}
@@ -45,13 +48,23 @@ const SiteOptionsMenu = ({ site }) => {
         }}
         getContentAnchorEl={null}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={handleClose}
+          component={CollisionLink}
+          to={`/server/websites/${id}`}
+        >
           <ListItemIcon>
             <Icon>edit</Icon>
           </ListItemIcon>
           Edit
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={handleClose}
+          component={SimpleLink}
+          href={browseUrl}
+          target="_blank"
+          rel="noopener"
+        >
           <ListItemIcon>
             <Icon>exit_to_app</Icon>
           </ListItemIcon>

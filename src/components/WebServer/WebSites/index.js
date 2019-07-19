@@ -38,7 +38,7 @@ const sites = [
     name: 'Jengalcoholic',
     status: 'Stopped',
     poolName: 'JengaPool',
-    binding: 'https://paul.dotnet.bosch.com',
+    binding: 'https://jenga.bosch.com',
     physicalPath: 'C:\\inetpub\\wwwroot\\Jengalcoholic'
   }
 ];
@@ -56,4 +56,5 @@ const WebSites = () => {
     </Container>
   );
 };
+
 export default WebSites;

@@ -9,7 +9,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Header, Nav, Content, Footer } from 'Layout';
 import NavList from './NavList';
 import WebSites from './WebSites/';
+import WebSiteDetails from './WebSites/WebSiteDetails';
 import ToolBar from './ToolBar';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
@@ -53,7 +55,8 @@ const WebServerLayout = () => {
         <Content>
           <div className={classes.toolbar} />
           <Switch>
-            <Route path="/server/websites" component={WebSites} />
+            <Route exact path="/server/websites" component={WebSites} />
+            <Route path="/server/websites/:id" component={WebSiteDetails} />
             <Route
               path="/server/rootsite"
               component={() => <span>SITE SETTINGS FOR ROOT</span>}
@@ -71,16 +74,22 @@ const WebServerLayout = () => {
         </Content>
       </Fade>
       <Fade in={true} timeout={2000}>
-        <Footer>
-          Made in{' '}
-          <Link
-            href="https://github.com/paulsancer/iis-reactmanager"
-            target="_blank"
-            rel="noopener"
-          >
-            GitHub &#10084;
-          </Link>
-          .
+        <Footer className={classes.footer}>
+          <Typography variant="caption">
+            Made with{' '}
+            <Typography variant="caption" color="error">
+              &#10084;
+            </Typography>{' '}
+            in{' '}
+            <Link
+              href="https://github.com/paulsancer/iis-reactmanager"
+              target="_blank"
+              rel="noopener"
+            >
+              GitHub
+            </Link>
+            .
+          </Typography>
         </Footer>
       </Fade>
     </>
