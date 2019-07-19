@@ -15,7 +15,10 @@ const styles = ({
   zIndex,
   shadows
 }) => ({
-  root: {},
+  root: {
+    backgroundColor: 'initial',
+    border: 'none'
+  },
   container: {
     overflow: 'hidden',
     display: 'flex',
@@ -87,6 +90,7 @@ const Nav = ({
       <Drawer
         {...props}
         className={`${className} ${classes.root}`}
+        classes={{ paper: classes.root }}
         open={open}
         onClose={setOpen}
         variant={navVariant}

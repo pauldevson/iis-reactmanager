@@ -1,19 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Fade from '@material-ui/core/Fade';
+import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import { Header, Nav, Content, Footer } from 'Layout';
 import NavList from './NavList';
-import NavHeader from './NavHeader';
 import WebSites from './WebSites/';
+import WebSiteDetails from './WebSites/WebSiteDetails';
 import ToolBar from './ToolBar';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-  toolbar: theme.mixins.toolbar
+  toolbar: theme.mixins.toolbar,
+  footer: { textAlign: 'right' }
 }));
 
 const WebServerLayout = () => {
@@ -46,16 +48,17 @@ const WebServerLayout = () => {
         >
           <div className={classes.toolbar} />
           {/* <NavHeader /> */}
-          <NavList />
+          <NavList selectedItem={0} />
         </Nav>
       </Fade>
       <Fade in={true} timeout={500}>
         <Content>
           <div className={classes.toolbar} />
           <Switch>
-            <Route path="/server/web-sites" component={WebSites} />
+            <Route exact path="/server/websites" component={WebSites} />
+            <Route path="/server/websites/:id" component={WebSiteDetails} />
             <Route
-              path="/server/root-site"
+              path="/server/rootsite"
               component={() => <span>SITE SETTINGS FOR ROOT</span>}
             />
             <Route
@@ -71,9 +74,22 @@ const WebServerLayout = () => {
         </Content>
       </Fade>
       <Fade in={true} timeout={2000}>
-        <Footer>
-          Made with love in{' '}
-          <a href="https://github.com/paulsancer/iis-reactmanager">GitHub</a>
+        <Footer className={classes.footer}>
+          <Typography variant="caption">
+            Made with{' '}
+            <Typography variant="caption" color="error">
+              &#10084;
+            </Typography>{' '}
+            in{' '}
+            <Link
+              href="https://github.com/paulsancer/iis-reactmanager"
+              target="_blank"
+              rel="noopener"
+            >
+              GitHub
+            </Link>
+            .
+          </Typography>
         </Footer>
       </Fade>
     </>
