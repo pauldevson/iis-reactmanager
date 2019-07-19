@@ -5,17 +5,15 @@ import { LayoutContext } from './Root';
 
 const styles = ({ breakpoints, palette, spacing, transitions }) => ({
   root: {
-    borderTop: '1px solid',
-    borderColor: palette.grey[200],
     padding: spacing.unit * 2,
     [breakpoints.up('sm')]: {
-      padding: spacing.unit * 3,
+      padding: spacing.unit * 3
     },
     transition: transitions.create(['margin'], {
       easing: transitions.easing.sharp,
-      duration: transitions.duration.leavingScreen,
-    }),
-  },
+      duration: transitions.duration.leavingScreen
+    })
+  }
 });
 
 const Footer = ({
@@ -34,7 +32,7 @@ const Footer = ({
     collapsedWidth,
     footerShrink,
     open,
-    navAnchor,
+    navAnchor
   } = ctx;
   const getMargin = () => {
     if (navAnchor !== 'left' || !footerShrink) return 0;
@@ -59,7 +57,7 @@ const Footer = ({
       className={`${className} ${classes.root}`}
       style={{
         ...style,
-        marginLeft: getMargin(),
+        marginLeft: getMargin()
       }}
     />
   );
@@ -69,12 +67,12 @@ Footer.propTypes = {
   className: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
   component: PropTypes.elementType,
-  style: PropTypes.shape({}),
+  style: PropTypes.shape({})
 };
 Footer.defaultProps = {
   className: '',
   component: 'footer',
-  style: {},
+  style: {}
 };
 
 export default withStyles(styles, { name: 'MuiFooter' })(Footer);

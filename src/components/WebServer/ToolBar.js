@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import { withStyles, useTheme } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
-import { CloudDownload, Code } from '@material-ui/icons';
+import { CloudDownload, Code, Storage } from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -59,7 +59,9 @@ const ToolBar = ({ classes, screen }) => {
           <Tooltip title="Server Connections">
             <ServersLink>
               <IconButton>
-                <Icon className="fa fa-server" />
+                {/* <Icon className="fa fa-server" /> */}
+
+                <Storage />
               </IconButton>
             </ServersLink>
           </Tooltip>

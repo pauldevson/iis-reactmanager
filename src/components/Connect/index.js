@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
@@ -9,7 +9,6 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Slide from '@material-ui/core/Slide';
-import { sleep } from 'utils';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -61,7 +60,7 @@ const Connect = ({ history }) => {
   const connect = () => setConnecting(true);
 
   useEffect(() => {
-    if (connecting) setTimeout(() => history.push('/server/web-sites'), 1000);
+    if (connecting) setTimeout(() => history.push('/server/websites'), 1000);
   }, [connecting, history]);
 
   return (
