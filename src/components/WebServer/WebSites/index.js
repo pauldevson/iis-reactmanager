@@ -51,7 +51,7 @@ const WebSites = () => {
         Web Sites
       </Typography>
       <Paper elevation={1} className={classes.tableContainer}>
-        <WebSitesTable sites={sites} />
+        <WebSitesTable />
       </Paper>
     </Container>
   );

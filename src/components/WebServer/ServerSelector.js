@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Icon, ListItemIcon } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
+import { connect } from 'react-redux';
+import { deleteServer } from 'redux/actions/connectionsActions';
+import { SERVER_SETTINGS } from 'utils/routes';
 
 const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
   search: {
@@ -52,21 +56,23 @@ const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
   }
 });
 
-const servers = [
-  'MTPWBPZ1.us.bosch.com',
-  'MTPWBPZ2.us.bosch.com',
-  'MTPWBPZ3.us.bosch.com',
-  'MTPWBPZ4.us.bosch.com',
-  'MTPWBPZ5.us.bosch.com',
-  'MTPWBPZ6.us.bosch.com'
-];
+const ServerSelector = props => {
+  console.log(props);
 
-const ServerSelector = ({ classes }) => {
-  const [serverName, setServerName] = useState(servers[2]);
+  const { classes, connections, history } = props;
+  const { servers } = connections;
+  const [serverName, setServerName] = useState(servers[0].name);
 
   const handleServerChange = e => {
-    setServerName(e.target.value);
+    const { value } = e.target;
+    // TODO remove this, only for testing redux dispatch
+    if (value === 'settins') {
+      history.push(SERVER_SETTINGS);
+      // deleteServer(servers.find(s => s.name === serverName));
+      // setServerName(servers[0].name);
+    } else setServerName(e.target.value);
   };
+
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
@@ -96,37 +102,30 @@ const ServerSelector = ({ classes }) => {
         renderValue={value => value}
       >
         {servers &&
-          servers.map(server => (
-            <MenuItem value={server} key={server}>
+          servers.map(({ id, name, connected }) => (
+            <MenuItem value={name} key={id}>
               <ListItemIcon>
-                {server === serverName ? (
-                  <Icon>cast_connected</Icon>
-                ) : (
-                  <Icon>cast</Icon>
-                )}
+                {connected ? <Icon>cast_connected</Icon> : <Icon>cast</Icon>}
               </ListItemIcon>
-              {server}
+              {name}
             </MenuItem>
           ))}
 
         <Divider />
-        <MenuItem value={'nothing'}>
+        <MenuItem value={'settins'}>
           <ListItemIcon>
             <Icon>settings</Icon>
           </ListItemIcon>
           Add or remove servers
         </MenuItem>
       </Select>
-      {/* <InputBase
-      placeholder="Server..."
-      value="MTPWBPZ1"
-      classes={{
-        root: classes.inputRoot,
-        input: classes.inputInput
-      }}
-    /> */}
     </div>
   );
 };
 
-export default withStyles(styles)(ServerSelector);
+export default withRouter(
+  connect(
+    ({ connections }) => ({ connections }),
+    { deleteServer }
+  )(withStyles(styles)(ServerSelector))
+);

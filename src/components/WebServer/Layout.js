@@ -6,7 +6,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Fade from '@material-ui/core/Fade';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
-import { Header, Nav, Content, Footer } from 'Layout';
+import { Header, Nav, Content, Footer } from 'layout';
 import NavList from './NavList';
 import WebSites from './WebSites/';
 import WebSiteDetails from './WebSites/WebSiteDetails';
