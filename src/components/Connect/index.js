@@ -43,8 +43,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Connect = ({ history, connect }) => {
-  const classes = useStyles();
+const Connect = ({ history, connect, connections }) => {
+  const { connected, connecting } = connetions;
+  if (connections.connected) history.push('/server/websites');
+
+  const { error, setError } = useState(connections.error);
 
   const [server, setServer] = useState({
     serverUrl: 'https://localhost:55539/',
@@ -57,7 +60,7 @@ const Connect = ({ history, connect }) => {
     x => x === null || x === ''
   );
 
-  const [connecting, setConnecting] = useState(false);
+  // const [connecting, setConnecting] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -78,6 +81,7 @@ const Connect = ({ history, connect }) => {
     });
   }
 
+  const classes = useStyles();
   return (
     <Slide in={true} direction="left" timeout={600}>
       <Container component="main" maxWidth="sm" className={classes.main}>
@@ -138,17 +142,22 @@ const Connect = ({ history, connect }) => {
                 <Checkbox
                   value="remember"
                   color="primary"
-                  checked={server.rememer}
+                  checked={server.remember}
                   onChange={() =>
                     setServer({
                       ...server,
-                      rememer: !server.rememer
+                      remember: !server.remember
                     })
                   }
                 />
               }
               label="Keep me connected from now on"
             />
+            {connections.error && (
+              <Typography variant="body1" color="error">
+                {connections.error.message}
+              </Typography>
+            )}
             <br />
             <Button
               variant="contained"

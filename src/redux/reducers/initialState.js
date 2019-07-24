@@ -3,6 +3,7 @@ export default {
   websites,
   connection: {
     connected: false,
+    connecting: false,
     servers
   }
 };

@@ -1,4 +1,9 @@
-import { CONNECT_SERVER, DELETE_SERVER, ADD_SERVER } from './constants';
+import {
+  CONNECT_SERVER,
+  DELETE_SERVER,
+  ADD_SERVER,
+  CONNECT_SERVER_ERROR
+} from './constants';
 import { connect } from 'api/serversApi';
 
 export function connectServer(server) {
@@ -12,11 +17,16 @@ export function connectServer(server) {
         if (server.remember) dispatch(addServer(server)); // Add the server to the saved servers
       } else {
         // TODO dispatch an error to state...
+        dispatch(connectError({ ...result }));
       }
     } catch (error) {
       return { connected: false, error };
     }
   };
+}
+
+export function connectError(error) {
+  return { type: CONNECT_SERVER_ERROR, error };
 }
 
 export function addServer(server) {
