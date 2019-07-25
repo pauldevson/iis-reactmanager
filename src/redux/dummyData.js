@@ -48,7 +48,7 @@ export const servers = [
     name: 'MTPWBPZ3',
     accessToken: '',
     remember: false,
-    connected: true
+    connected: false
   },
   {
     id: 3,

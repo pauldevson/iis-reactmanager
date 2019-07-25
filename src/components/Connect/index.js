@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Slide from '@material-ui/core/Slide';
-import { connectServer } from 'redux/actions/connectionsActions';
+import { connectServer, setConnecting } from 'redux/actions/connectionsActions';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -43,11 +43,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Connect = ({ history, connect, connections }) => {
-  const { connected, connecting } = connetions;
-  if (connections.connected) history.push('/server/websites');
-
-  const { error, setError } = useState(connections.error);
+const Connect = ({ history, connect, connections, setConnecting }) => {
+  const { connected, connecting, error } = connections;
+  if (connected) history.push('/server/websites');
 
   const [server, setServer] = useState({
     serverUrl: 'https://localhost:55539/',
@@ -60,28 +58,23 @@ const Connect = ({ history, connect, connections }) => {
     x => x === null || x === ''
   );
 
-  // const [connecting, setConnecting] = useState(false);
-
   const handleSubmit = event => {
     event.preventDefault();
-    setConnecting(true);
+    setConnecting({ connecting: true, error: null });
   };
 
   useEffect(() => {
-    debugger;
-    if (connecting) handleConnect(); //setTimeout(() => history.push('/server/websites'), 1000);
-  }, [connecting, history]);
-
-  function handleConnect() {
-    connect({
-      url: server.serverUrl,
-      name: server.displayName,
-      token: server.accessToken,
-      remember: server.remember
-    });
-  }
+    if (connecting)
+      connect({
+        url: server.serverUrl,
+        name: server.displayName,
+        token: server.accessToken,
+        remember: server.remember
+      }); // setTimeout(() => history.push('/server/websites'), 1000);
+  }, [connecting]);
 
   const classes = useStyles();
+
   return (
     <Slide in={true} direction="left" timeout={600}>
       <Container component="main" maxWidth="sm" className={classes.main}>
@@ -153,9 +146,9 @@ const Connect = ({ history, connect, connections }) => {
               }
               label="Keep me connected from now on"
             />
-            {connections.error && (
+            {error && (
               <Typography variant="body1" color="error">
-                {connections.error.message}
+                {error.message}
               </Typography>
             )}
             <br />
@@ -187,5 +180,6 @@ const Connect = ({ history, connect, connections }) => {
 };
 
 export default connectStore(({ connections }) => ({ connections }), {
-  connect: connectServer
+  connect: connectServer,
+  setConnecting
 })(withRouter(Connect));

@@ -61,7 +61,18 @@ const ServerSelector = props => {
 
   const { classes, connections, history } = props;
   const { servers } = connections;
-  const [serverName, setServerName] = useState(servers[0].name);
+
+  const currentServer = servers.find(s => s.connected);
+  debugger;
+  const [serverName, setServerName] = useState(
+    currentServer && currentServer.name
+  );
+
+  let avoidRender = false;
+  if (currentServer === undefined) {
+    avoidRender = true;
+    history.push('/connect');
+  }
 
   const handleServerChange = e => {
     const { value } = e.target;
@@ -73,7 +84,9 @@ const ServerSelector = props => {
     } else setServerName(e.target.value);
   };
 
-  return (
+  return avoidRender ? (
+    <span>Redirecting...</span>
+  ) : (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
         <Icon>cast_connected</Icon>
