@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import SiteOptionsMenu from './SiteOptionsMenu';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,7 +29,7 @@ const CollisionLink = React.forwardRef((props, ref) => (
   <RouterLink innerRef={ref} {...props} />
 ));
 
-export default function WebSitesTable(props) {
+function WebSitesTable(props) {
   const classes = useStyles();
   const { sites } = props;
 
@@ -88,3 +89,5 @@ export default function WebSitesTable(props) {
     // </Paper>
   );
 }
+
+export default connect(({ websites }) => ({ sites: websites }))(WebSitesTable);

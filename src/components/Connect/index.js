@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect as connectStore } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
@@ -9,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Slide from '@material-ui/core/Slide';
+import { connectServer, setConnecting } from 'redux/actions/connectionsActions';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -41,27 +43,37 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Connect = ({ history }) => {
-  const classes = useStyles();
+const Connect = ({ history, connect, connections, setConnecting }) => {
+  const { connected, connecting, error } = connections;
+  if (connected) history.push('/server/websites');
 
-  const [connParams, setConnParams] = useState({
-    serverUrl: 'https://localhost:588856/',
+  const [server, setServer] = useState({
+    serverUrl: 'https://localhost:55539/',
     displayName: 'Local IIS',
     accessToken: '',
     remember: false
   });
 
-  const isFormComplete = Object.values(connParams).some(
+  const isFormComplete = Object.values(server).some(
     x => x === null || x === ''
   );
 
-  const [connecting, setConnecting] = useState(false);
-
-  const connect = () => setConnecting(true);
+  const handleSubmit = event => {
+    event.preventDefault();
+    setConnecting({ connecting: true, error: null });
+  };
 
   useEffect(() => {
-    if (connecting) setTimeout(() => history.push('/server/websites'), 1000);
-  }, [connecting, history]);
+    if (connecting)
+      connect({
+        url: server.serverUrl,
+        name: server.displayName,
+        token: server.accessToken,
+        remember: server.remember
+      }); // setTimeout(() => history.push('/server/websites'), 1000);
+  }, [connecting]);
+
+  const classes = useStyles();
 
   return (
     <Slide in={true} direction="left" timeout={600}>
@@ -74,7 +86,7 @@ const Connect = ({ history }) => {
           <Typography component="p" variant="body1">
             Let's connect to IIS Administration API.
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -82,9 +94,9 @@ const Connect = ({ history }) => {
               fullWidth
               label="Server URL"
               autoFocus
-              value={connParams.serverUrl}
+              value={server.serverUrl}
               onChange={e =>
-                setConnParams({ ...connParams, serverUrl: e.target.value })
+                setServer({ ...server, serverUrl: e.target.value })
               }
             />
             <TextField
@@ -94,9 +106,9 @@ const Connect = ({ history }) => {
               fullWidth
               label="Display Name"
               type="text"
-              value={connParams.displayName}
+              value={server.displayName}
               onChange={e =>
-                setConnParams({ ...connParams, displayName: e.target.value })
+                setServer({ ...server, displayName: e.target.value })
               }
             />
             <TextField
@@ -106,9 +118,9 @@ const Connect = ({ history }) => {
               fullWidth
               label="Access Token"
               type="text"
-              value={connParams.accessToken}
+              value={server.accessToken}
               onChange={e =>
-                setConnParams({ ...connParams, accessToken: e.target.value })
+                setServer({ ...server, accessToken: e.target.value })
               }
             />
             <span style={{ float: 'right' }}>
@@ -123,23 +135,28 @@ const Connect = ({ history }) => {
                 <Checkbox
                   value="remember"
                   color="primary"
-                  checked={connParams.rememer}
+                  checked={server.remember}
                   onChange={() =>
-                    setConnParams({
-                      ...connParams,
-                      rememer: !connParams.rememer
+                    setServer({
+                      ...server,
+                      remember: !server.remember
                     })
                   }
                 />
               }
               label="Keep me connected from now on"
             />
+            {error && (
+              <Typography variant="body1" color="error">
+                {error.message}
+              </Typography>
+            )}
             <br />
             <Button
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={connect}
+              type="submit"
               disabled={isFormComplete || connecting}
             >
               Connect
@@ -162,4 +179,7 @@ const Connect = ({ history }) => {
   );
 };
 
-export default withRouter(Connect);
+export default connectStore(({ connections }) => ({ connections }), {
+  connect: connectServer,
+  setConnecting
+})(withRouter(Connect));
