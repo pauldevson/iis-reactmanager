@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/iis-reactmanager/static/css/main.76c48c14.chunk.css",
-    "main.js": "/iis-reactmanager/static/js/main.482c5da5.chunk.js",
-    "main.js.map": "/iis-reactmanager/static/js/main.482c5da5.chunk.js.map",
+    "main.js": "/iis-reactmanager/static/js/main.baab5132.chunk.js",
+    "main.js.map": "/iis-reactmanager/static/js/main.baab5132.chunk.js.map",
     "runtime~main.js": "/iis-reactmanager/static/js/runtime~main.1806305e.js",
     "runtime~main.js.map": "/iis-reactmanager/static/js/runtime~main.1806305e.js.map",
     "static/js/2.b71e7bac.chunk.js": "/iis-reactmanager/static/js/2.b71e7bac.chunk.js",
     "static/js/2.b71e7bac.chunk.js.map": "/iis-reactmanager/static/js/2.b71e7bac.chunk.js.map",
     "index.html": "/iis-reactmanager/index.html",
-    "precache-manifest.dc1b6ea2375c6ad21eca962fe90ece63.js": "/iis-reactmanager/precache-manifest.dc1b6ea2375c6ad21eca962fe90ece63.js",
+    "precache-manifest.fb76e9778b9c2e8ecaf4e51188360a16.js": "/iis-reactmanager/precache-manifest.fb76e9778b9c2e8ecaf4e51188360a16.js",
     "service-worker.js": "/iis-reactmanager/service-worker.js",
     "static/css/main.76c48c14.chunk.css.map": "/iis-reactmanager/static/css/main.76c48c14.chunk.css.map"
   }
