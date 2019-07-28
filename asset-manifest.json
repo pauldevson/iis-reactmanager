@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/iis-reactmanager/static/css/main.76c48c14.chunk.css",
+    "main.js": "/iis-reactmanager/static/js/main.83be4bf4.chunk.js",
+    "main.js.map": "/iis-reactmanager/static/js/main.83be4bf4.chunk.js.map",
+    "runtime~main.js": "/iis-reactmanager/static/js/runtime~main.1806305e.js",
+    "runtime~main.js.map": "/iis-reactmanager/static/js/runtime~main.1806305e.js.map",
+    "static/js/2.b71e7bac.chunk.js": "/iis-reactmanager/static/js/2.b71e7bac.chunk.js",
+    "static/js/2.b71e7bac.chunk.js.map": "/iis-reactmanager/static/js/2.b71e7bac.chunk.js.map",
+    "index.html": "/iis-reactmanager/index.html",
+    "precache-manifest.e6f9e39318f8306b34cad51b40b70861.js": "/iis-reactmanager/precache-manifest.e6f9e39318f8306b34cad51b40b70861.js",
+    "service-worker.js": "/iis-reactmanager/service-worker.js",
+    "static/css/main.76c48c14.chunk.css.map": "/iis-reactmanager/static/css/main.76c48c14.chunk.css.map"
+  }
+}
