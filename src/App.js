@@ -16,6 +16,7 @@ const store = configureStore();
 
 const theme = createMuiTheme({
   palette: {
+    type: 'dark',
     primary: teal
   }
 });
@@ -25,7 +26,7 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <Root config={config} style={{ minHeight: '100vh' }}>
         <CssBaseline />
-        <BrowserRouter>
+        <BrowserRouter basename="/iis-reactmanager">
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/get" component={Home} />
