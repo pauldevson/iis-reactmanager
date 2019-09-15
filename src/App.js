@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import lightGreen from '@material-ui/core/colors/lightGreen';
+import green from '@material-ui/core/colors/green';
 import { Root, config } from 'layout';
 import Home from 'components/Home';
 import NotFound from 'components/NotFound';
@@ -17,7 +17,7 @@ const store = configureStore();
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
-    primary: lightGreen
+    primary: green
   }
 });
 
@@ -26,7 +26,7 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <Root config={config} style={{ minHeight: '100vh' }}>
         <CssBaseline />
-        <BrowserRouter basename="/iis-reactmanager">
+        <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/get" component={Home} />
