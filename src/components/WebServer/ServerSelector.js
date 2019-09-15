@@ -14,9 +14,9 @@ const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
     position: 'relative',
     marginRight: 8,
     borderRadius: shape.borderRadius,
-    background: palette.grey[200],
+    background: palette.grey[800],
     '&:hover': {
-      background: palette.grey[300]
+      background: palette.grey[900]
     },
     marginLeft: 0,
     width: '100%',
@@ -69,10 +69,10 @@ const ServerSelector = props => {
   );
 
   let avoidRender = false;
-  if (currentServer === undefined) {
-    avoidRender = true;
-    history.push('/connect');
-  }
+  // if (currentServer === undefined) {
+  //   avoidRender = true;
+  //   history.push('/connect');
+  // }
 
   const handleServerChange = e => {
     const { value } = e.target;

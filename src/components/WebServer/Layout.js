@@ -51,7 +51,7 @@ const WebServerLayout = () => {
           <NavList selectedItem={0} />
         </Nav>
       </Fade>
-      <Fade in={true} timeout={500}>
+      <Fade in={true} timeout={2000}>
         <Content>
           <div className={classes.toolbar} />
           <Switch>
@@ -73,7 +73,7 @@ const WebServerLayout = () => {
           </Switch>
         </Content>
       </Fade>
-      <Fade in={true} timeout={2000}>
+      <Fade in={true} style={{ transitionDelay: '5000ms' }}>
         <Footer className={classes.footer}>
           <Typography variant="caption">
             Made with{' '}

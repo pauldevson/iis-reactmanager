@@ -15,12 +15,12 @@ import { connectServer, setConnecting } from 'redux/actions/connectionsActions';
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
-      backgroundColor: theme.palette.common.white
+      // backgroundColor: theme.palette.common.white
     }
   },
-  paper: {
-    backgroundColor: '#ffffff'
-  },
+  // paper: {
+  //   backgroundColor: '#ffffff'
+  // },
   avatar: {
     margin: theme.spacing(1),
     width: 100,
