@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import teal from '@material-ui/core/colors/teal';
+import lightGreen from '@material-ui/core/colors/lightGreen';
 import { Root, config } from 'layout';
 import Home from 'components/Home';
 import NotFound from 'components/NotFound';
@@ -17,7 +17,7 @@ const store = configureStore();
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
-    primary: teal
+    primary: lightGreen
   }
 });
 

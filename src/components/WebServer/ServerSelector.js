@@ -15,9 +15,9 @@ const styles = ({ spacing, transitions, breakpoints, palette, shape }) => ({
     marginRight: 8,
     borderRadius: shape.borderRadius,
     background: palette.grey[800],
-    '&:hover': {
-      background: palette.grey[900]
-    },
+    // '&:hover': {
+    //   background: palette.grey[700]
+    // },
     marginLeft: 0,
     width: '100%',
     [breakpoints.up('sm')]: {
@@ -92,7 +92,6 @@ const ServerSelector = props => {
         <Icon>cast_connected</Icon>
       </div>
       <Select
-        variant="outlined"
         value={serverName}
         onChange={handleServerChange}
         placeholder="Server..."
